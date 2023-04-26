@@ -1,11 +1,8 @@
 document.querySelector("#fileInput").addEventListener("change",testImage);
 
-function putImage() {
-    // getImageData is used to copy the pixels
-    var imageData = context.getImageData(55, 50, 200, 100);
-    console.log(imageData.data);
-    context.putImageData(imageData, 55, 170);
-}
+var imgData;
+var imgWidth;
+var imgHeight;
 
 function testImage(){
     var canvas = document.createElement('canvas');
@@ -15,9 +12,13 @@ function testImage(){
 	image.src = URL.createObjectURL(event.target.files[0]);
     image.onload=function(){
         ctx.drawImage(image, 0, 0);
+        ctx.canvas.width=image.width;
+        ctx.canvas.height=image.height;
+        imgWidth=image.width;
+        imgHeight=image.height;
         imgData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
         console.log(imgData);
+        document.getElementById("height").innerHTML=imgHeight;
+        document.getElementById("width").innerHTML=imgWidth;
     };
-    console.log(imgData);
-    //ctx.putImageData(imgData,0,0);
 };
