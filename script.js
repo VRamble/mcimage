@@ -8,11 +8,16 @@ function putImage() {
 }
 
 function testImage(){
-    var image = document.getElementById('output');
-	image.src = URL.createObjectURL(event.target.files[0]);
     var canvas = document.createElement('canvas');
     var ctx = canvas.getContext('2d');
-    ctx.drawImage(image, 0, 0);
-    var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    console.log('this function triggered!');
+    var image = document.getElementById('output');
+	image.src = URL.createObjectURL(event.target.files[0]);
+    image.onload=function(){
+        ctx.drawImage(image, 0, 0);
+        imgData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+        console.log(imgData);
+    };
     console.log(imgData);
+    //ctx.putImageData(imgData,0,0);
 };
