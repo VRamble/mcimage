@@ -8,8 +8,16 @@
 
 <body>
     <p><input type="file" accept="image/jpeg, image/png, image/jpg" id="fileInput"></p>
-    <p><img id="output" width="200" /></p>
+    <p><img id="output"/></p>
+    <p></p>
     <p>Height: <span id="height"></span> Width: <span id="width"></span></p>
+    <canvas id="repaint">
+        <script>
+            var c = document.getElementById("repaint");
+            var ctx = c.getContext("2d");
+            ctx.putImageData(imgData,0,0);
+        </script>
+    </canvas>
 </body>
 
 </html>
