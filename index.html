@@ -1,14 +1,33 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+
 <head>
-    <title>Our Funky HTML Page</title>
-    <script src="script.js" defer></script> 
+    <title>Tetsing page</title>
+    <script src="script.js"></script>
 </head>
 
 <body>
-    <p><input type = "button" onclick = "Hello();" name = "ok" value = "Click Me" /></p>
+
+	<h3 style="color:green; "> GeeksforGeeks</h3>
+	<h3 style="color:green; "> GetImageData() Method</h3>
+	<canvas id="gfgCanvas"
+			width="300"
+			height="300"
+			style="border:1px solid ;">
+	</canvas>
+
+	<script>
+		var gfg = document.getElementById("gfgCanvas");
+		var context = gfg.getContext("2d");
+		context.fillStyle = "green";
+		context.fillRect(55, 50, 200, 100);
+
+	</script>
+	<br>
+	<button onclick="putImage()">Making sure this worked</button>
     <p><input type="file" accept="image/jpeg, image/png, image/jpg" id="fileInput"></p>
     <p><img id="output" width="200" /></p>
-    <p>imgData: </p><p id="imgData0"></p>
+
 </body>
+
 </html>

@@ -1,30 +1,18 @@
-//document.querySelector("#fileInput").addEventListener("change",paintImage);
+document.querySelector("#fileInput").addEventListener("change",testImage);
 
-function initContext(canvasID, contextType)
-{
-   var canvas = document.getElementById(canvasID);
-   var context = canvas.getContext(contextType);
-   return context;
+function putImage() {
+    // getImageData is used to copy the pixels
+    var imageData = context.getImageData(55, 50, 200, 100);
+    console.log(imageData.data);
+    context.putImageData(imageData, 55, 170);
 }
 
-function loadImage(imageSource, context)
-{
-    var imageObj = new Image();
-    imageObj.onload = function()
-    {
-        context.drawImage(imageObj, 0, 0);
-        var imageData = context.getImageData(0,0,10,10);
-        readImage(imageData);
-    };
-    imageObj.src = imageSource;
-    return imageObj;
-}
-
-function readImage(imageData)
-{
-    console.log();
-    console.log(imageData.data[0]);
-}
-
-var context = initContext('canvas','2d');
-var imageObj = loadImage('red.jpg',context)
+function testImage(){
+    var image = document.getElementById('output');
+	image.src = URL.createObjectURL(event.target.files[0]);
+    var canvas = document.createElement('canvas');
+    var ctx = canvas.getContext('2d');
+    ctx.drawImage(image, 0, 0);
+    var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    console.log(imgData);
+};
