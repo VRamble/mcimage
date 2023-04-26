@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+    <title>Our Funky HTML Page</title>
+</head>
+
+<body>
+    <p><input type = "button" onclick = "Hello();" name = "ok" value = "Click Me" /></p>
+    <p><input type="file" accept="image/jpeg, image/png, image/jpg" id="fileInput"></p>
+    <p><img id="output" width="200" /></p>
+    <script>
+        document.querySelector("#fileInput").addEventListener("change",function(){
+            var image = document.getElementById('output');
+	        image.src = URL.createObjectURL(event.target.files[0]);
+            var canvas = document.createElement('canvas');
+            var ctx = canvas.getContext('2d');
+            ctx.drawImage(image, 0, 0);
+            var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+            console.log(canvas.height);
+        });
+    </script>
+</body>
+</html>
