@@ -3,21 +3,15 @@
 
 <head>
     <title>Tetsing page</title>
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <p><input type="file" accept="image/jpeg, image/png, image/jpg" id="fileInput"></p>
-    <p><img id="output"/></p>
-    <p></p>
-    <p>Height: <span id="height"></span> Width: <span id="width"></span></p>
-    <canvas id="repaint">
-        <script>
-            var c = document.getElementById("repaint");
-            var ctx = c.getContext("2d");
-            ctx.putImageData(imgData,0,0);
-        </script>
-    </canvas>
+    <input type="file" accept="image/*" onchange="readImageFile(this)">
+    <div id="image-container"></div>
+    <p>Contrast Slider [-128,128]</p><input type="range" name="cslider" id="cslider" min="-128" max="128" step="1" value="0" onchange="displayContrast(getElementById('cslider').value)">
+    <div id="constrast-image-container"></div>
+    <script defer language="JavaScript" type="text/javascript" src="script.js"></script>
 </body>
 
 </html>
