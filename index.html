@@ -7,7 +7,8 @@
 </head>
 
 <body>
-    <input type="file" accept="image/*" onchange="readImageFile(this)">
+    <button onclick="readTextFile()">read mcimage\blocks\blocknames.txt</button>
+    <input type="file" accept="image/*" onchange="readImageFile(this,0)">
     <div id="image-container"></div>
     <p>Contrast Slider [-128,128]</p><input type="range" name="cslider" id="cslider" min="-128" max="128" step="1" value="0" onchange="displayContrast(getElementById('cslider').value)">
     <div id="constrast-image-container"></div>
