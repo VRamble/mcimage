@@ -25,13 +25,30 @@ function readTextFile(){
 		while (i < blockNames.length) {
     	var pngLoc="blocks/"+blockNames[i];
 			blockData.push(getImagePixelData(pngLoc));
-    		i++;
+    	i++;
 		}
 		console.log(blockData);
+    downloadTextFile();
   	})
   	.catch(error => {
     	console.error('Error reading file:', error);
   	});
+}
+
+function downloadTextFile() {
+  i=0;
+  exportData="";
+  while (i<blockNames.length){
+    exportData=exportData+blockData[i][0].join(',')+"\n";
+    i++;
+  }
+  const blob = new Blob([text], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = "blocks.txt";
+  link.click();
+  URL.revokeObjectURL(url);
 }
 
 function getImagePixelData(filename) {
