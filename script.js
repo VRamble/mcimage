@@ -90,7 +90,8 @@ function readTextFile() {
 	let exportData = '';
   
 	blockData.forEach(blockInfo => {
-	  const line = blockInfo.join(',') + '\n';
+	  line = '[\''+blockInfo.join(',') + '],\n';
+	line=line.replace(',','\',');
 	  exportData += line;
 	});
   
@@ -243,6 +244,25 @@ function displayColor(rNum,gNum,bNum) {
 	const imageContainer = document.getElementById("color-image-container");
 	imageContainer.innerHTML = "";
 	imageContainer.appendChild(img);
+	displayBlock(rNum,gNum,bNum);
+};
+
+function displayBlock(rNum,gNum,bNum){
+	bestDiff=Math.sqrt((avgColors[0][1]-rNum)**2+(avgColors[0][2]-gNum)**2+(avgColors[0][3]-bNum)**2);
+	bestIndex=0;
+	for(let i=0;i<481;i++){
+		tempDiff=Math.sqrt((avgColors[i][1]-rNum)**2+(avgColors[i][2]-gNum)**2+(avgColors[i][3]-bNum)**2);
+		if(tempDiff<bestDiff){
+			bestDiff=tempDiff;
+			bestIndex=i;
+		}
+	}
+	const imagePath = 'blocks/'+avgColors[bestIndex][0];
+	const blockContainer = document.querySelector('#block-image-container');
+	blockContainer.innerHTML = '';
+	const image = document.createElement('img');
+	image.src = imagePath;
+	blockContainer.appendChild(image);
 };
 
 function boundCheck(num){
