@@ -265,6 +265,42 @@ function displayBlock(rNum,gNum,bNum){
 	blockContainer.appendChild(image);
 };
 
+function populateGrid() {
+  const container = document.getElementById("container");
+  makeRows(imgHeight, imgWidth);
+}
+
+function makeRows(rows, cols) {
+  const container = document.getElementById("container");
+  container.style.setProperty("--grid-rows", rows);
+  container.style.setProperty("--grid-cols", cols);
+
+  container.innerHTML = ""; // Clear the container before populating
+
+  for (let c = 0; c < rows * cols; c++) {
+    let cell = document.createElement("div");
+    cell.className = "grid-item-" + c;
+    container.appendChild(cell);
+	pixel=pixels[c];
+
+    let image = document.createElement("img");
+
+	bestDiff=Math.sqrt((avgColors[0][1]-pixel[0])**2+(avgColors[0][2]-pixel[1])**2+(avgColors[0][3]-pixel[2])**2);
+	bestIndex=0;
+	for(let i=0;i<481;i++){
+		tempDiff=Math.sqrt((avgColors[i][1]-pixel[0])**2+(avgColors[i][2]-pixel[1])**2+(avgColors[i][3]-pixel[2])**2);
+		if(tempDiff<bestDiff){
+			bestDiff=tempDiff;
+			bestIndex=i;
+		}
+	}
+	//const imagePath = 'blocks/'+avgColors[bestIndex][0];
+    image.src = 'blocks/'+avgColors[bestIndex][0];
+    cell.appendChild(image);
+  }
+}
+
+
 function boundCheck(num){
 	if(num>255)
 		return 255;
